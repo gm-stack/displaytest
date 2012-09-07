@@ -69,22 +69,21 @@ void grid(int size) {
 
 void boxes() {
     SDL_UnlockSurface(screen);
-    Uint32 colours[8];
-    colours[0] = SDL_MapRGB(screen->format, 255,255,255);
-    colours[1] = SDL_MapRGB(screen->format, 255,0,0);
-    colours[2] = SDL_MapRGB(screen->format, 0,255,0);
-    colours[3] = SDL_MapRGB(screen->format, 0,0,255);
-    colours[4] = SDL_MapRGB(screen->format, 0,255,255);
-    colours[5] = SDL_MapRGB(screen->format, 255,0,255);
-    colours[6] = SDL_MapRGB(screen->format, 255,255,0);
-    colours[7] = SDL_MapRGB(screen->format, 0,0,0);
+    Uint32 colours[7];
+    colours[0] = SDL_MapRGB(screen->format, 255,0,0);
+    colours[1] = SDL_MapRGB(screen->format, 0,255,0);
+    colours[2] = SDL_MapRGB(screen->format, 0,0,255);
+    colours[3] = SDL_MapRGB(screen->format, 0,255,255);
+    colours[4] = SDL_MapRGB(screen->format, 255,0,255);
+    colours[5] = SDL_MapRGB(screen->format, 255,255,0);
+    colours[6] = SDL_MapRGB(screen->format, 0,0,0);
 
     for (int y=0; y<height; y++) {
         for (int x=0; x<width; x++) {
             Uint32 *pixmem = (Uint32*)screen->pixels + (y * width) + x;
             int xbar = (x < width/2) ? x/16 : (width-x)/16;
             int ybar = (y < height/2) ? y/16 : (height-y)/16;
-            *pixmem = colours[(xbar < ybar ? xbar : ybar) % 8];
+            *pixmem = colours[(xbar < ybar ? xbar : ybar) % 7];
         }
     }
     SDL_LockSurface(screen);
@@ -167,10 +166,18 @@ int main(int argc, char *argv[])
                         case SDLK_o:
                             boxes();
                             break;
+                        case SDLK_f:
+                            
+                            break;
                         default:
                             break;
                     }
 					break;
+                case SDL_VIDEORESIZE:
+                    width = event.resize.w;
+                    height = event.resize.h;
+                    screen = SDL_SetVideoMode(width, height, 32, SDL_SWSURFACE | SDL_RESIZABLE | SDL_DOUBLEBUF );
+                    break;
 				case SDL_QUIT:
 					return 0;
 					break;
