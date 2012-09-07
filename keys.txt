@@ -1,0 +1,26 @@
+a
+b: blue
+c: cyan
+d: grid, 8 pixels, white on black
+e: grey
+f
+g: green
+h
+i: grid, 16 pixels, white on black
+j
+k: black
+l
+m: magenta
+n
+o: boxes
+p
+q
+r: red
+s
+t
+u
+v
+w: white
+x: checkerboard
+y: yellow
+z: checkerboard with 2-1 pattern
